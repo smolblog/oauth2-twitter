@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "540bc4b3be9db92d8a81ae07daa5e245",
+    "content-hash": "723fff4ef20c4c8ffc89b343568c7236",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -719,6 +719,49 @@
                 }
             ],
             "time": "2022-02-25T11:15:52+00:00"
+        },
+        {
+            "name": "wilkques/pkce-php",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wilkques/pkce-php.git",
+                "reference": "fa8ecf84371f1df9da561208c3aedbb0866d6456"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wilkques/pkce-php/zipball/fa8ecf84371f1df9da561208c3aedbb0866d6456",
+                "reference": "fa8ecf84371f1df9da561208c3aedbb0866d6456",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Wilkques\\PKCE\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wilkques",
+                    "email": "wilkques@gmail.com"
+                }
+            ],
+            "description": "PKCE for PHP",
+            "support": {
+                "issues": "https://github.com/wilkques/pkce-php/issues",
+                "source": "https://github.com/wilkques/pkce-php/tree/v2.0.0"
+            },
+            "time": "2022-05-18T02:56:16+00:00"
         }
     ],
     "packages-dev": [
@@ -791,6 +834,153 @@
                 }
             ],
             "time": "2022-03-03T08:28:38+00:00"
+        },
+        {
+            "name": "eloquent/phony",
+            "version": "5.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eloquent/phony.git",
+                "reference": "f34d67d6db6b6f351ea7e8aa8066107e756ec26b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eloquent/phony/zipball/f34d67d6db6b6f351ea7e8aa8066107e756ec26b",
+                "reference": "f34d67d6db6b6f351ea7e8aa8066107e756ec26b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8"
+            },
+            "require-dev": {
+                "eloquent/code-style": "^1.0",
+                "eloquent/phpstan-phony": "^0.7",
+                "errors/exceptions": "^0.2",
+                "ext-pdo": "*",
+                "friendsofphp/php-cs-fixer": "^2",
+                "hamcrest/hamcrest-php": "^2",
+                "phpstan/extension-installer": "^1",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/initialize.php",
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Eloquent\\Phony\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                }
+            ],
+            "description": "Mocks, stubs, and spies for PHP.",
+            "homepage": "http://eloquent-software.com/phony/",
+            "keywords": [
+                "Double",
+                "Dummy",
+                "fake",
+                "mock",
+                "mocking",
+                "spy",
+                "stub",
+                "stubbing",
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/eloquent/phony/issues",
+                "source": "https://github.com/eloquent/phony/tree/5.0.2"
+            },
+            "time": "2021-02-17T01:45:10+00:00"
+        },
+        {
+            "name": "eloquent/phony-phpunit",
+            "version": "7.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eloquent/phony-phpunit.git",
+                "reference": "e77ff95ea6235211d4aae7e5f53488a5faebc2e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eloquent/phony-phpunit/zipball/e77ff95ea6235211d4aae7e5f53488a5faebc2e0",
+                "reference": "e77ff95ea6235211d4aae7e5f53488a5faebc2e0",
+                "shasum": ""
+            },
+            "require": {
+                "eloquent/phony": "^5",
+                "php": "^7.3 || ^8",
+                "phpunit/phpunit": "^9"
+            },
+            "require-dev": {
+                "eloquent/code-style": "^1",
+                "eloquent/phpstan-phony": "^0.7",
+                "errors/exceptions": "^0.2",
+                "friendsofphp/php-cs-fixer": "^2",
+                "phpstan/extension-installer": "^1",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "7.2.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/initialize.php",
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Eloquent\\Phony\\Phpunit\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                }
+            ],
+            "description": "Phony for PHPUnit.",
+            "homepage": "http://eloquent-software.com/phony/",
+            "keywords": [
+                "Double",
+                "Dummy",
+                "fake",
+                "mock",
+                "mocking",
+                "spy",
+                "stub",
+                "stubbing",
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/eloquent/phony-phpunit/issues",
+                "source": "https://github.com/eloquent/phony-phpunit/tree/7.1.0"
+            },
+            "time": "2020-12-21T09:36:47+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2800,7 +2990,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^7.3 || ^8.0"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
 }

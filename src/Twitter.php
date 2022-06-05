@@ -17,6 +17,7 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Represents a Twitter OAuth2 service provider (authorization server).
@@ -26,6 +27,24 @@ use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 class Twitter extends AbstractProvider
 {
     use BearerAuthorizationTrait;
+
+		/**
+		 * In addition to state, store a PKCE verifier that will be used when
+		 * getting the authorization token.
+		 * 
+		 * @link https://www.oauth.com/oauth2-servers/pkce/authorization-code-exchange/
+		 *
+		 * @var string
+		 */
+		protected string $pkce_verifier;
+
+		public function get_pkce_verifier(): string {
+			if (!isset($this->pkce_verifier)) {
+				$this->pkce_verifier = $this->generate_pkce_verifier();
+			}
+
+			return $this->pkce_verifier;
+		}
 
 		/**
      * Returns the base URL for authorizing a client.
@@ -38,6 +57,19 @@ class Twitter extends AbstractProvider
     {
         return 'https://twitter.com/i/oauth2/authorize';
     }
+
+		protected function getAuthorizationParameters(array $options): array
+		{
+			if (!isset($options['code_challenge']))
+			{
+				$verifier = $options['pkce_verifier'] ?? $this->get_pkce_verifier();
+
+				$options['code_challenge'] = 'ss';
+				$options['code_challenge_method'] = 'plain';
+			}
+
+			return parent::getAuthorizationParameters($options);
+		}
 
 		/**
      * Returns the base URL for requesting an access token.
@@ -76,7 +108,19 @@ class Twitter extends AbstractProvider
         return [
             'tweet.read',
             'users.read',
+						'offline.access',
         ];
+    }
+
+		/**
+     * Returns the string that should be used to separate scopes when building
+     * the URL for requesting an access token.
+     *
+     * @return string Contains one space (` `)
+     */
+    protected function getScopeSeparator(): string
+    {
+        return ' ';
     }
 
     /**
@@ -110,5 +154,21 @@ class Twitter extends AbstractProvider
     protected function createResourceOwner(array $response, AccessToken $token): TwitterUser
 		{
 			return new TwitterUser($response);
+		}
+
+		/**
+		 * Gives a URL-friendly Base64-encoded version of a string
+		 * 
+		 * @link https://www.oauth.com/oauth2-servers/pkce/authorization-request/
+		 *
+		 * @param string $param String to encode
+		 * @return string
+		 */
+		private function base64_urlencode(string $param): string {
+			return rtrim(strtr(base64_encode($param), '+/', '-_'), '=');
+		}
+
+		public function generate_pkce_verifier(): string {
+			
 		}
 }

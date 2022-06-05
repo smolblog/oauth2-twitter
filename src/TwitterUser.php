@@ -16,7 +16,7 @@ class TwitterUser implements ResourceOwnerInterface
      */
     public function __construct(array $response)
     {
-        $this->response = $response;
+        $this->response = $response['data'] ?? [];
     }
 
     public function getId()

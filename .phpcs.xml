@@ -4,8 +4,6 @@
 
 	<file>./src</file>
 
-	<exclude-pattern>*/tests/*</exclude-pattern>
-
 	<arg name="extensions" value="php"/>
 	<arg name="tab-width" value="2"/>
 	<arg name="colors"/>
