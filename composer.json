@@ -1,0 +1,45 @@
+{
+  "name": "smolblog/oauth2-twitter",
+  "description": "Twitter OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Smolblog",
+      "email": "code@smolblog.org"
+    },
+    {
+      "name": "Evan Hildreth",
+      "email": "me@eph.me"
+    }
+  ],
+  "keywords": [
+    "oauth",
+    "oauth2",
+    "client",
+    "authorization",
+    "authorisation",
+    "twitter"
+  ],
+  "require": {
+    "league/oauth2-client": "^2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=8.0",
+    "squizlabs/php_codesniffer": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Smolblog\\OAuth2\\Client\\Provider\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Smolblog\\OAuth2\\Client\\Provider\\Test\\": "test/src/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit --testdox tests",
+    "lint": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
+    "lintfix": "./vendor/squizlabs/php_codesniffer/bin/phpcbf"
+  }
+}
