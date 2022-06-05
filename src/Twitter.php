@@ -29,25 +29,26 @@ class Twitter extends AbstractProvider
 {
     use BearerAuthorizationTrait;
 
-		/**
-		 * In addition to state, store a PKCE verifier that will be used when
-		 * getting the authorization token.
-		 * 
-		 * @link https://www.oauth.com/oauth2-servers/pkce/authorization-code-exchange/
-		 *
-		 * @var string
-		 */
-		protected string $pkce_verifier;
+        /**
+         * In addition to state, store a PKCE verifier that will be used when
+         * getting the authorization token.
+         *
+         * @link https://www.oauth.com/oauth2-servers/pkce/authorization-code-exchange/
+         *
+         * @var string
+         */
+    protected string $pkce_verifier;
 
-		public function get_pkce_verifier(): string {
-			if (!isset($this->pkce_verifier)) {
-				$this->pkce_verifier = $this->generate_pkce_verifier();
-			}
+    public function getPkceVerifier(): string
+    {
+        if (!isset($this->pkce_verifier)) {
+            $this->pkce_verifier = $this->generatePkceVerifier();
+        }
 
-			return $this->pkce_verifier;
-		}
+        return $this->pkce_verifier;
+    }
 
-		/**
+        /**
      * Returns the base URL for authorizing a client.
      *
      * Eg. https://oauth.service.com/authorize
@@ -59,20 +60,19 @@ class Twitter extends AbstractProvider
         return 'https://twitter.com/i/oauth2/authorize';
     }
 
-		protected function getAuthorizationParameters(array $options): array
-		{
-			if (!isset($options['code_challenge']))
-			{
-				$verifier = $options['pkce_verifier'] ?? $this->get_pkce_verifier();
+    protected function getAuthorizationParameters(array $options): array
+    {
+        if (!isset($options['code_challenge'])) {
+            $verifier = $options['pkce_verifier'] ?? $this->getPkceVerifier();
 
-				$options['code_challenge'] = $this->base64_urlencode(hash('sha256', $verifier));
-				$options['code_challenge_method'] = 'S256';
-			}
+            $options['code_challenge'] = $this->base64Urlencode(hash('sha256', $verifier));
+            $options['code_challenge_method'] = 'S256';
+        }
 
-			return parent::getAuthorizationParameters($options);
-		}
+        return parent::getAuthorizationParameters($options);
+    }
 
-		/**
+        /**
      * Returns the base URL for requesting an access token.
      *
      * Eg. https://oauth.service.com/token
@@ -85,7 +85,7 @@ class Twitter extends AbstractProvider
         return 'https://api.twitter.com/2/oauth2/token';
     }
 
-		/**
+        /**
      * Returns the URL for requesting the resource owner's details.
      *
      * @param AccessToken $token
@@ -96,7 +96,7 @@ class Twitter extends AbstractProvider
         return 'https://api.twitter.com/2/users/me';
     }
 
-		/**
+        /**
      * Returns the default scopes used by this provider.
      *
      * This should only be the scopes that are required to request the details
@@ -109,11 +109,11 @@ class Twitter extends AbstractProvider
         return [
             'tweet.read',
             'users.read',
-						'offline.access',
+                        'offline.access',
         ];
     }
 
-		/**
+        /**
      * Returns the string that should be used to separate scopes when building
      * the URL for requesting an access token.
      *
@@ -133,16 +133,16 @@ class Twitter extends AbstractProvider
      * @return void
      */
     protected function checkResponse(ResponseInterface $response, $data): void
-		{
-			if (isset($data['data'])) {
-				return;
-			}
+    {
+        if (isset($data['data'])) {
+            return;
+        }
 
-			$error = $data['description'] ?? '';
-			$code = $data['code'] ?? 400;
+            $error = $data['description'] ?? '';
+            $code = $data['code'] ?? 400;
 
-			throw new IdentityProviderException($error, $code, $data);
-		}
+            throw new IdentityProviderException($error, $code, $data);
+    }
 
     /**
      * Generates a resource owner object from a successful resource owner
@@ -153,34 +153,36 @@ class Twitter extends AbstractProvider
      * @return TwitterUser
      */
     protected function createResourceOwner(array $response, AccessToken $token): TwitterUser
-		{
-			return new TwitterUser($response);
-		}
+    {
+            return new TwitterUser($response);
+    }
 
-		/**
-		 * Gives a URL-friendly Base64-encoded version of a string
-		 * 
-		 * @link https://www.oauth.com/oauth2-servers/pkce/authorization-request/
-		 *
-		 * @param string $param String to encode
-		 * @return string
-		 */
-		private function base64_urlencode(string $param): string {
-			return rtrim(strtr(base64_encode($param), '+/', '-_'), '=');
-		}
+        /**
+         * Gives a URL-friendly Base64-encoded version of a string
+         *
+         * @link https://www.oauth.com/oauth2-servers/pkce/authorization-request/
+         *
+         * @param string $param String to encode
+         * @return string
+         */
+    private function base64Urlencode(string $param): string
+    {
+        return rtrim(strtr(base64_encode($param), '+/', '-_'), '=');
+    }
 
-		/**
-		 * Create a PKCE verifier string.
-		 * 
-		 * @link https://www.oauth.com/oauth2-servers/pkce/authorization-request/
-		 *
-		 * @return string
-		 */
-		public function generate_pkce_verifier(): string {
-			$generator = (new RandomLibFactory)->getMediumStrengthGenerator();
-			return $generator->generateString(
-				$generator->generateInt(43, 128), // Length between 43-128 characters
-				'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-._~'
-			);
-		}
+        /**
+         * Create a PKCE verifier string.
+         *
+         * @link https://www.oauth.com/oauth2-servers/pkce/authorization-request/
+         *
+         * @return string
+         */
+    public function generatePkceVerifier(): string
+    {
+        $generator = (new RandomLibFactory)->getMediumStrengthGenerator();
+        return $generator->generateString(
+            $generator->generateInt(43, 128), // Length between 43-128 characters
+            '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-._~'
+        );
+    }
 }

@@ -24,15 +24,15 @@ class TwitterUser implements ResourceOwnerInterface
         return $this->response['id'];
     }
 
-		public function getName()
-		{
-			return $this->response['name'];
-		}
+    public function getName()
+    {
+        return $this->response['name'];
+    }
 
-		public function getUsername()
-		{
-			return $this->response['username'];
-		}
+    public function getUsername()
+    {
+        return $this->response['username'];
+    }
 
     /**
      * Get user data as an array.
