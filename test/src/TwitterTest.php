@@ -144,6 +144,13 @@ class TwitterTest extends TestCase
 		);
 	}
 
+  public function testVerifierGeneration(): void {
+    $verifier = $this->provider->generate_pkce_verifier();
+    $match_result = preg_match('/^[A-Za-z0-9\-._~]{43,128}$/', $verifier);
+
+    self::assertEquals(1, $match_result);
+  }
+
 	private function mockAccessToken(): AccessToken
 	{
 		return new AccessToken([

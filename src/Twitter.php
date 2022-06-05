@@ -18,6 +18,7 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
+use RandomLib\Factory as RandomLibFactory;
 
 /**
  * Represents a Twitter OAuth2 service provider (authorization server).
@@ -64,8 +65,8 @@ class Twitter extends AbstractProvider
 			{
 				$verifier = $options['pkce_verifier'] ?? $this->get_pkce_verifier();
 
-				$options['code_challenge'] = 'ss';
-				$options['code_challenge_method'] = 'plain';
+				$options['code_challenge'] = $this->base64_urlencode(hash('sha256', $verifier));
+				$options['code_challenge_method'] = 'S256';
 			}
 
 			return parent::getAuthorizationParameters($options);
@@ -168,7 +169,18 @@ class Twitter extends AbstractProvider
 			return rtrim(strtr(base64_encode($param), '+/', '-_'), '=');
 		}
 
+		/**
+		 * Create a PKCE verifier string.
+		 * 
+		 * @link https://www.oauth.com/oauth2-servers/pkce/authorization-request/
+		 *
+		 * @return string
+		 */
 		public function generate_pkce_verifier(): string {
-			
+			$generator = (new RandomLibFactory)->getMediumStrengthGenerator();
+			return $generator->generateString(
+				$generator->generateInt(43, 128), // Length between 43-128 characters
+				'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-._~'
+			);
 		}
 }
