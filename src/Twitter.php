@@ -38,7 +38,7 @@ class Twitter extends AbstractProvider
      *
      * @var string
      */
-    protected string $pkce_verifier;
+    protected string $pkceVerifier;
 
     /**
      * Get the unhashed PKCE Verifier string for the request.
@@ -47,22 +47,11 @@ class Twitter extends AbstractProvider
      */
     public function getPkceVerifier(): string
     {
-        if (!isset($this->pkce_verifier)) {
-            $this->pkce_verifier = $this->generatePkceVerifier();
+        if (!isset($this->pkceVerifier)) {
+            $this->pkceVerifier = $this->generatePkceVerifier();
         }
 
-        return $this->pkce_verifier;
-    }
-
-    /**
-     * Get the hashed and encoded PKCE challenge string for the request.
-     *
-     * @return string
-     */
-    public function getPkceChallenge(): string
-    {
-        $verifier = $this->getPkceVerifier();
-        return $this->base64Urlencode(hash('sha256', $verifier));
+        return $this->pkceVerifier;
     }
 
     /**
@@ -80,9 +69,7 @@ class Twitter extends AbstractProvider
     protected function getAuthorizationParameters(array $options): array
     {
         if (!isset($options['code_challenge'])) {
-            $verifier = $options['pkce_verifier'] ?? $this->getPkceVerifier();
-
-            $options['code_challenge'] = $this->base64Urlencode(hash('sha256', $verifier));
+            $options['code_challenge'] = $this->generatePkceChallenge();
             $options['code_challenge_method'] = 'S256';
         }
 
@@ -142,7 +129,7 @@ class Twitter extends AbstractProvider
         return [
             'tweet.read',
             'users.read',
-                        'offline.access',
+            'offline.access',
         ];
     }
 
@@ -217,5 +204,17 @@ class Twitter extends AbstractProvider
             $generator->generateInt(43, 128), // Length between 43-128 characters
             '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-._~'
         );
+    }
+
+    /**
+     * Get the hashed and encoded PKCE challenge string for the request.
+     *
+     * @param string $passed_verifier Verifier string to use. Defaults to $this->getPkceVerifier().
+     * @return string
+     */
+    public function generatePkceChallenge(string $passed_verifier = null): string
+    {
+        $verifier = $passed_verifier ?? $this->getPkceVerifier();
+        return $this->base64Urlencode(hash('SHA256', $verifier, true));
     }
 }
