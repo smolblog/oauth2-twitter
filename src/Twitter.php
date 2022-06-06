@@ -154,14 +154,14 @@ class Twitter extends AbstractProvider
      */
     protected function checkResponse(ResponseInterface $response, $data): void
     {
-        if (isset($data['data'])) {
+        if ($response->getStatusCode() == 200) {
             return;
         }
 
-            $error = $data['description'] ?? '';
-            $code = $data['code'] ?? 400;
+        $error = $data['description'] ?? '';
+        $code = $data['code'] ?? $response->getStatusCode();
 
-            throw new IdentityProviderException($error, $code, $data);
+        throw new IdentityProviderException($error, $code, $data);
     }
 
     /**
