@@ -40,6 +40,11 @@ class Twitter extends AbstractProvider
      */
     protected string $pkce_verifier;
 
+    /**
+     * Get the unhashed PKCE Verifier string for the request.
+     *
+     * @return string
+     */
     public function getPkceVerifier(): string
     {
         if (!isset($this->pkce_verifier)) {
@@ -47,6 +52,17 @@ class Twitter extends AbstractProvider
         }
 
         return $this->pkce_verifier;
+    }
+
+    /**
+     * Get the hashed and encoded PKCE challenge string for the request.
+     *
+     * @return string
+     */
+    public function getPkceChallenge(): string
+    {
+        $verifier = $this->getPkceVerifier();
+        return $this->base64Urlencode(hash('sha256', $verifier));
     }
 
     /**
