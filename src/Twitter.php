@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  *
  * @copyright Copyright (c) Evan Hildreth <me@eph.me> (on behalf of the Smolblog project)
- * @license http://opensource.org/licenses/MIT MIT
+ * @license http://opensource.org/licenses/BSD BSD
  * @link https://packagist.org/packages/smolblog/oauth2-twitter Packagist
  * @link https://github.com/smolblog/oauth2-twitter GitHub
  */
@@ -174,7 +174,7 @@ class Twitter extends AbstractProvider
      */
     protected function createResourceOwner(array $response, AccessToken $token): TwitterUser
     {
-            return new TwitterUser($response);
+        return new TwitterUser($response);
     }
 
     /**

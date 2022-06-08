@@ -88,4 +88,4 @@ Maintained as part of the [Smolblog](https://smolblog.org/) project.
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/smolblog/oauth2-twitter/blob/main/LICENSE.md) for more information.
+The Modified 3-clause BSD License (BSD). Please see [License File](https://github.com/smolblog/oauth2-twitter/blob/main/LICENSE.md) for more information.
