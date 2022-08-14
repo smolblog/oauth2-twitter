@@ -158,7 +158,7 @@ class Twitter extends AbstractProvider
             return;
         }
 
-        $error = $data['description'] ?? '';
+        $error = $data['error_description'] ?? '';
         $code = $data['code'] ?? $response->getStatusCode();
 
         throw new IdentityProviderException($error, $code, $data);
