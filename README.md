@@ -81,8 +81,8 @@ if (!isset($_GET['code'])) {
 
 		// Try to get an access token (using the authorization code grant)
 		$token = $provider->getAccessToken('authorization_code', [
-				'code' => $_GET['code'],
-				'code_verifier' => $_SESSION['oauth2verifier'],
+			'code' => $_GET['code'],
+			'code_verifier' => $_SESSION['oauth2verifier'],
 		]);
 
 		// Optional: Now you have a token you can look up a users profile data
@@ -97,14 +97,18 @@ if (!isset($_GET['code'])) {
 		print_r($e);
 		echo '</pre>';
 
-			// Failed to get user details
-			exit('Oh dear...');
+		// Failed to get user details
+		exit('Oh dear...');
 	}
 
 	// Use this to interact with an API on the users behalf
 	echo $token->getToken();
 }
 ```
+
+## Changelog
+
+See `CHANGELOG.md`
 
 ## Credits
 
