@@ -34,6 +34,11 @@ class TwitterUser implements ResourceOwnerInterface
         return $this->response['username'];
     }
 
+    public function getImageUrl()
+    {
+        return $this->response['profile_image_url'];
+    }
+
     /**
      * Get user data as an array.
      *
