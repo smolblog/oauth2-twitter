@@ -117,9 +117,11 @@ See `CHANGELOG.md`
 
 Maintained* as part of the [Smolblog](https://smolblog.org/) project.
 
-*With [Twitter's new paid API][twapi], the Smolblog project is no longer able to reliably maintain this plugin. We will
+_*With [Twitter's new paid API][twapi], the Smolblog project is no longer able to reliably maintain this plugin. We will
 fix any issues we can, but we can no longer react to new features. If you want to take over active maintenance, get in
-touch.
+touch._
+
+[twapi]: https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api#item0
 
 ## License
 
