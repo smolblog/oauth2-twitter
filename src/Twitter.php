@@ -55,6 +55,29 @@ class Twitter extends AbstractProvider
     }
 
     /**
+     * Get the unhashed PKCE Verifier string for the request.
+     * 
+     * Forward-compatability with upcoming League/OAuth2 release.
+     *
+     * @return string
+     */
+    public function getPkceCode(): string {
+        return $this->getPkceVerifier();
+    }
+
+    /**
+     * Set the unhashed PKCE verifier string.
+     * 
+     * Forward-compatability with upcoming League/OAuth2 release.
+     *
+     * @param string $pkceCode
+     * @return void
+     */
+    public function setPkceCode($pkceCode) {
+        $this->pkceVerifier = $pkceCode;
+    }
+
+    /**
      * Returns the base URL for authorizing a client.
      *
      * Eg. https://oauth.service.com/authorize
@@ -113,7 +136,7 @@ class Twitter extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token): string
     {
-        return 'https://api.twitter.com/2/users/me';
+        return 'https://api.twitter.com/2/users/me?user.fields=id,name,username,profile_image_url';
     }
 
     /**

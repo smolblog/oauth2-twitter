@@ -1,7 +1,7 @@
 Modified BSD License
 ====================
 
-_Copyright © 2022, Smolblog and contributors_  
+_Copyright © 2022-2023, Smolblog and contributors_  
 _All rights reserved._
 
 Redistribution and use in source and binary forms, with or without
