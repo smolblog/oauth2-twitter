@@ -33,30 +33,30 @@ if (!isset($_GET['code'])) {
 	unset($_SESSION['oauth2verifier']);
 	
 	// Optional: The default scopes are ‘tweet.read’, ‘users.read’,
-    // and ‘offline.access’. You can change them like this:
-    $options = [
-        ‘scope’ => [
-            ‘tweet.read’,
-            ‘tweet.write’,
-            ‘tweet.moderate.write’,
-            ‘users.read’,
-            ‘follows.read’,
-            ‘follows.write’,
-            ‘offline.access’,
-            ‘space.read’,
-            ‘mute.read’,
-            ‘mute.write’,
-            ‘like.read’,
-            ‘like.write’,
-            ‘list.read’,
-            ‘list.write’,
-            ‘block.read’,
-            ‘block.write’,
-            ‘bookmark.read’,
-            ‘bookmark.write’,
-        ],
+	// and ‘offline.access’. You can change them like this:
+	$options = [
+		‘scope’ => [
+			‘tweet.read’,
+			‘tweet.write’,
+			‘tweet.moderate.write’,
+			‘users.read’,
+			‘follows.read’,
+			‘follows.write’,
+			‘offline.access’,
+			‘space.read’,
+			‘mute.read’,
+			‘mute.write’,
+			‘like.read’,
+			‘like.write’,
+			‘list.read’,
+			‘list.write’,
+			‘block.read’,
+			‘block.write’,
+			‘bookmark.read’,
+			‘bookmark.write’,
+		],
 	]; 
-    
+		
 
 	// If we don't have an authorization code then get one
 	$authUrl = $provider->getAuthorizationUrl($options);
@@ -113,8 +113,13 @@ See `CHANGELOG.md`
 ## Credits
 
 - [Evan Hildreth](https://github.com/oddevan)
+- [Niklas](https://github.com/niklaswa)
 
-Maintained as part of the [Smolblog](https://smolblog.org/) project.
+Maintained* as part of the [Smolblog](https://smolblog.org/) project.
+
+*With [Twitter's new paid API][twapi], the Smolblog project is no longer able to reliably maintain this plugin. We will
+fix any issues we can, but we can no longer react to new features. If you want to take over active maintenance, get in
+touch.
 
 ## License
 
