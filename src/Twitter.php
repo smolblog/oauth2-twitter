@@ -235,7 +235,7 @@ class Twitter extends AbstractProvider
      * @param string $passed_verifier Verifier string to use. Defaults to $this->getPkceVerifier().
      * @return string
      */
-    public function generatePkceChallenge(string $passed_verifier = null): string
+    public function generatePkceChallenge(?string $passed_verifier = null): string
     {
         $verifier = $passed_verifier ?? $this->getPkceVerifier();
         return $this->base64Urlencode(hash('SHA256', $verifier, true));
