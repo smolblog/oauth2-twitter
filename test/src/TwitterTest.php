@@ -77,6 +77,7 @@ class TwitterTest extends TestCase
         "id" => "1132750396936589312",
         "name" => "Smolblog",
         "username" => "_smolblog",
+        "confirmed_email" => "some@email.test",
         ]
         ];
 
@@ -102,12 +103,14 @@ class TwitterTest extends TestCase
         self::assertEquals(1132750396936589312, $user->getId());
         self::assertEquals('Smolblog', $user->getName());
         self::assertEquals('_smolblog', $user->getUsername());
+        self::assertEquals('some@email.test', $user->getEmail());
 
         $user = $user->toArray();
 
         self::assertArrayHasKey('id', $user);
         self::assertArrayHasKey('name', $user);
         self::assertArrayHasKey('username', $user);
+        self::assertArrayHasKey('confirmed_email', $user);
     }
 
     public function testErrorResponse(): void

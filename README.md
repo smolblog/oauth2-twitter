@@ -31,14 +31,15 @@ $provider = new Smolblog\OAuth2\Client\Provider\Twitter([
 if (!isset($_GET['code'])) {
 	unset($_SESSION['oauth2state']);
 	unset($_SESSION['oauth2verifier']);
-	
+
 	// Optional: The default scopes are ‘tweet.read’, ‘users.read’,
-	// and ‘offline.access’. You can change them like this:
+	// ‘users.email’ and ‘offline.access’. You can change them like this:
 	$options = [
 		‘scope’ => [
 			‘tweet.read’,
 			‘tweet.write’,
 			‘tweet.moderate.write’,
+			‘users.email’,
 			‘users.read’,
 			‘follows.read’,
 			‘follows.write’,
@@ -55,8 +56,8 @@ if (!isset($_GET['code'])) {
 			‘bookmark.read’,
 			‘bookmark.write’,
 		],
-	]; 
-		
+	];
+
 
 	// If we don't have an authorization code then get one
 	$authUrl = $provider->getAuthorizationUrl($options);
@@ -90,7 +91,7 @@ if (!isset($_GET['code'])) {
 		$user = $provider->getResourceOwner($token);
 
 		// Use these details to create a new profile
-		printf('Hello %s!', $user->getName());
+		printf('Hello %s (%s)!', $user->getName(), $user->getEmail());
 
 	} catch (Exception $e) {
 		echo '<pre>';
