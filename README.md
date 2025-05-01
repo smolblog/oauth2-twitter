@@ -2,7 +2,7 @@
 
 This package provides Twitter OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
-**As I (Evan) have closed all my X accounts, I can no longer verify this library's features myself. If you are willing to take maintenance of this library, please get in touch!)
+**As I (Evan) have closed all my X accounts, I can no longer verify this library's features myself. If you are willing to take maintenance of this library, please get in touch!**
 
 ## Installation
 
