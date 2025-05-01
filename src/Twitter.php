@@ -138,7 +138,7 @@ class Twitter extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token): string
     {
-        return 'https://api.twitter.com/2/users/me?user.fields=id,name,username,profile_image_url';
+        return 'https://api.twitter.com/2/users/me?user.fields=id,name,username,profile_image_url,confirmed_email';
     }
 
     /**
@@ -153,6 +153,7 @@ class Twitter extends AbstractProvider
     {
         return [
             'tweet.read',
+            'users.email',
             'users.read',
             'offline.access',
         ];

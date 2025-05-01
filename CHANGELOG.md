@@ -17,3 +17,7 @@ This project uses [semantic versioning](https://semver.org).
 - Fix a license mismatch (#4)
 - Add user profile image to the default user (#5)
 - Update README to reflect state of Twitter API and this library
+
+### 1.2.0
+
+- Add user email to the default user
