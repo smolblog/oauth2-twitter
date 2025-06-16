@@ -88,7 +88,7 @@ class Twitter extends AbstractProvider
      */
     public function getBaseAuthorizationUrl(): string
     {
-        return 'https://twitter.com/i/oauth2/authorize';
+        return 'https://x.com/i/oauth2/authorize';
     }
 
     protected function getAuthorizationParameters(array $options): array
@@ -127,7 +127,7 @@ class Twitter extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params): string
     {
-        return 'https://api.twitter.com/2/oauth2/token';
+        return 'https://api.x.com/2/oauth2/token';
     }
 
     /**
